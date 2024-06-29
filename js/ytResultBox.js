@@ -29,7 +29,7 @@ var ytResultBox = (function () {
 		s.txtLayer.y = 50;
 	
 		var titleTxt = s.txtTemplate.clone();
-		titleTxt.text = "Final Distance";
+		titleTxt.text = "Jarak Akhir";
 		titleTxt.size = 20;
 		titleTxt.x = (s.getWidth() - titleTxt.getWidth()) / 2;
 		s.txtLayer.addChild(titleTxt);
