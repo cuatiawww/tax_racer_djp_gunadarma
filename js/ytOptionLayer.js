@@ -5,13 +5,13 @@ var ytOptionLayer = (function () {
 	
 		s.carIndex = 0;
 		s.placeIndex = 0;
-		s.coins = 0; // Tambahkan ini
+		s.coins = parseInt(localStorage.getItem('coins')) || 0;
 	
 		s.carInfoList = [
-			{name : "BMW", data : 0},
-			{name : "FORD", data : 1},
-			{name : "LAMBORGHINI", data : 2},
-			{name : "PAGANI", data : 4}
+			{name : "BMW", data : 0, cost: 0},
+			{name : "FORD", data : 1, cost: 50},
+			{name : "LAMBORGHINI", data : 2, cost: 100},
+			{name : "PAGANI", data : 4, cost: 200}
 		];
 	
 		s.placeInfoList = [
@@ -24,6 +24,7 @@ var ytOptionLayer = (function () {
 		];
 	
 		s.unlockedPlaces = { "Kota 1 (Default)": true }; // CANYON sudah terbuka secara default
+		s.purchasedCars = JSON.parse(localStorage.getItem('purchasedCars')) || { "BMW": true }; // Hanya BMW terbuka secara default
 	
 		var backgroundBmp = new LBitmap(dataList["default_menu_background"]);
 		backgroundBmp.scaleX = LGlobal.width / backgroundBmp.getWidth();
@@ -37,8 +38,9 @@ var ytOptionLayer = (function () {
 		s.addChild(s.placeOptionLayer);
 	
 		s.addCarOption();
+		s.showCoins(); // Panggil fungsi untuk menampilkan koin
 	}
-	
+
 	ytOptionLayer.prototype.addCarOption = function () {
 		var s = this, carInfoList = s.carInfoList;
 
@@ -53,11 +55,11 @@ var ytOptionLayer = (function () {
 			var cBmpd = carBmpd.clone();
 			cBmpd.setCoordinate(0, o.data * carBmpd.height);
 			var iconBmp = new LBitmap(cBmpd);
-			iconBmp.scaleX = iconBmp.scaleY = 0.5;
+			iconBmp.scaleX = iconBmp.scaleY = 0.2;
 			contentLayer.addChild(iconBmp);
 
 			var txt = new LTextField();
-			txt.text = o.name;
+			txt.text = o.name + (s.purchasedCars[o.name] ? "" : "\n(Locked - " + o.cost + " coins)");
 			txt.size = 13;
 			txt.color = "white";
 			txt.weight = "bold";
@@ -68,17 +70,36 @@ var ytOptionLayer = (function () {
 
 			contentLayer.x = 20;
 
-			var btn = new buttonL(2, [contentLayer, null, "middle"], [0.85, 0.9]);
+			var btn = new buttonL(2, [contentLayer, null, "middle"], [1, 0.6]);
 			btn.index = k;
 			btn.y = k * (btn.getHeight() + 10);
 			s.carOptionLayer.addChild(btn);
 
 			btn.addEventListener(LMouseEvent.MOUSE_UP, function (e) {
-				s.carIndex = e.currentTarget.index;
-
-				s.carOptionLayer.removeAllChild();
-
-				s.addPlaceOption();
+				var car = s.carInfoList[e.currentTarget.index];
+				if (s.purchasedCars[car.name]) {
+					var tax = Math.ceil(car.cost * 0.1);
+					if (s.coins >= tax) {
+						s.coins -= tax;
+						localStorage.setItem('coins', s.coins);
+						alert("Pajak sebesar " + tax + " coins telah dibayar untuk menggunakan " + car.name);
+						s.carIndex = e.currentTarget.index;
+						s.carOptionLayer.removeAllChild();
+						s.addPlaceOption();
+					} else {
+						alert("Anda membutuhkan " + tax + " coins untuk membayar pajak penggunaan " + car.name);
+					}
+				} else if (s.coins >= car.cost) {
+					s.coins -= car.cost;
+					localStorage.setItem('coins', s.coins);
+					s.purchasedCars[car.name] = true;
+					localStorage.setItem('purchasedCars', JSON.stringify(s.purchasedCars));
+					alert(car.name + " berhasil dibeli!");
+					s.carOptionLayer.removeAllChild();
+					s.addCarOption();
+				} else {
+					alert("Anda membutuhkan " + car.cost + " coins untuk membeli " + car.name);
+				}
 			});
 		}
 
@@ -87,8 +108,7 @@ var ytOptionLayer = (function () {
 	};
 
 	ytOptionLayer.prototype.addPlaceOption = function () {
-		var s = this, placeInfoList = s.placeInfoList;       
-		s.coins = parseInt(localStorage.getItem('coins')) || 0;
+		var s = this, placeInfoList = s.placeInfoList;
 		s.showCoins(); // Update jumlah koin
 		
 		for (var k = 0; k < placeInfoList.length; k++) {
