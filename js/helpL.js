@@ -19,7 +19,7 @@ var helpL = (function () {
 
 	helpL.prototype.addHelpTxt = function () {
 		var s = this,
-		t = "Ketuk bagian X pada layar untuk menggerakkan mobil ke jalan X. \n \n (X ∈ {kiri, kanan}) \n \n Apakah saya jelas?",
+		t = "Ketuk bagian X pada layar untuk menggerakkan mobil ke jalan X. \n \n X = kiri atau kanan \n \n Apakah saya jelas?",
 		tl = t.split(" ");
 
 		var helpTxt = new LTextField();

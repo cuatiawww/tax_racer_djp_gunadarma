@@ -28,8 +28,10 @@ var aboutLayer = (function () {
 		txtTemplate.color = "white";
 
 		var txtList = [
-			"A: Game Apa ini",
-			"Y: Ini adalah Game edukasi pajak. dikhususkan untuk"
+			"A: Game Apa ini?",
+			"Y: Ini adalah Game edukasi pajak. Dirancang untuk anak usia dini jenjang usia 1-8 tahun.",
+			"Y: Tax Racer adalah game balapan yang seru dan edukatif. Dalam permainan ini, anak-anak akan belajar tentang konsep dasar pajak dengan cara yang menyenangkan dan interaktif. Mereka akan mengendalikan mobil balap sambil mengumpulkan koin sebanyak mungkin dan menyelesaikan tantangan di sepanjang lintasan.",
+			// \n Selama bermain, anak-anak akan menghadapi berbagai rintangan dan tantangan. Mereka harus mengumpulkan koin dengan mengendarai mobil sejauh mungkin agar mendapatkan 1 koin setiap 10 meter. Setiap level memberikan pengalaman yang semakin menantang, mendorong anak-anak untuk terus bermain sambil belajar. Dengan reward koin setelah menyelesaikan setiap level, Tax Racer menciptakan pengalaman belajar yang menyenangkan dan mendidik.
 		];
 
 		for (var k = 0; k < txtList.length; k++) {

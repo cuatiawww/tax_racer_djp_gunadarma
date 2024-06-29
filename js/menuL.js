@@ -31,7 +31,7 @@ var menuL = (function () {
 		logo.scaleX = logoScale;
 		logo.scaleY = logoScale;
 		logo.x = (LGlobal.width - logo.getWidth() * logoScale) * 0.23;
-		logo.y = 40; // Adjust this value as needed
+		logo.y = 50; // Adjust this value as needed
 
 		s.addChild(logo);
 		console.log("Logo added at:", logo.x, logo.y); // Log the position
