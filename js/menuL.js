@@ -7,10 +7,10 @@ var menuL = (function () {
 		backgroundBmp.scaleX = LGlobal.width / backgroundBmp.getWidth();
 		backgroundBmp.scaleY = LGlobal.height / backgroundBmp.getHeight();
 		s.addChild(backgroundBmp);
-
+		s.addTitle();
 		s.btnLayer = new LSprite();
 		s.addChild(s.btnLayer);
-		s.addTitle();
+		
 		s.addBtns()
 	}
 
@@ -27,8 +27,11 @@ var menuL = (function () {
 
 		// Create and position the logo
 		var logo = new LBitmap(logoData);
-		logo.x = (LGlobal.width - logo.getWidth()) * 0.5;
-		logo.y = 50; // Adjust this value as needed
+		var logoScale = 0.2; // Adjust the scale as needed
+		logo.scaleX = logoScale;
+		logo.scaleY = logoScale;
+		logo.x = (LGlobal.width - logo.getWidth() * logoScale) * 0.23;
+		logo.y = 40; // Adjust this value as needed
 
 		s.addChild(logo);
 		console.log("Logo added at:", logo.x, logo.y); // Log the position
@@ -78,7 +81,7 @@ var menuL = (function () {
 		}
 
 		s.btnLayer.x = (LGlobal.width - s.btnLayer.getWidth()) * 0.5;
-		s.btnLayer.y = (LGlobal.height - s.btnLayer.getHeight()) * 0.5;
+		s.btnLayer.y = (LGlobal.height - s.btnLayer.getHeight()) * 0.7;
 	};
 
 	return menuL;

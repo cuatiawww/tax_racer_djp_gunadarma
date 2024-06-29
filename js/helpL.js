@@ -19,7 +19,7 @@ var helpL = (function () {
 
 	helpL.prototype.addHelpTxt = function () {
 		var s = this,
-		t = "Tap the X part of the screen to make the car move to the X road. \n \n (X ∈ {left, right}) \n \n Do I make sense?",
+		t = "Ketuk bagian X pada layar untuk menggerakkan mobil ke jalan X. \n \n (X ∈ {kiri, kanan}) \n \n Apakah saya jelas?",
 		tl = t.split(" ");
 
 		var helpTxt = new LTextField();
@@ -60,7 +60,7 @@ var helpL = (function () {
 		var okTxt = new LTextField();
 		okTxt.color = "white";
 		okTxt.size = 20;
-		okTxt.text = "Ok, I know~";
+		okTxt.text = "Oke, Jelas~";
 		okTxt.weight = "bold";
 		var okBtn = new buttonL(2, [okTxt, "center", "middle"], [0.6, 0.6]);
 		okBtn.x = (LGlobal.width - okBtn.getWidth()) * 0.5;

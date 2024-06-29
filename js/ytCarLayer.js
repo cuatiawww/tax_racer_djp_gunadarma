@@ -205,7 +205,8 @@ var ytCarLayer = (function () {
 					s.car.destroy();
 	
 					var coins = Math.floor(cx / 10);  // Menghitung koin berdasarkan jarak
-					localStorage.setItem('coins', (parseInt(localStorage.getItem('coins')) || 0) + coins);
+					var totalCoins = (parseInt(localStorage.getItem('coins')) || 0) + coins;
+					localStorage.setItem('coins', totalCoins);
 	
 					return [true, cx, cy, cw, ch, coins];
 				}
@@ -213,6 +214,7 @@ var ytCarLayer = (function () {
 		}
 		return [false];
 	};
+	
 	
 
 	return ytCarLayer;

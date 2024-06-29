@@ -49,6 +49,8 @@ var ytResultBox = (function () {
 		s.txtLayer.addChild(coinsTxt);
 	};
 	
+	
+	
 
 	ytResultBox.EVENT_CLICK_BUTTON = "event_click_button";
 
@@ -58,9 +60,9 @@ var ytResultBox = (function () {
 		s.btnLayer.y = s.txtLayer.y + s.txtLayer.getHeight() + 50;
 
 		var btnTxtList = [
-			"Replay",
-			"Back to Menu",
-			"Back to Option"
+			"Ulangi",
+			"Kembali ke beranda",
+			"Kembali ke pilihan"
 		];
 
 		for (var k = 0, btnY = 0; k < btnTxtList.length; k++) {
